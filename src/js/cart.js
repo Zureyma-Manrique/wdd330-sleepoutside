@@ -1,9 +1,21 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, qs } from './utils.mjs'; // IMPORT qs
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage('so-cart') || []; // Add fallback for empty cart
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  qs('.product-list').innerHTML = htmlItems.join('');
+
+  // --- NEW CODE TO CALCULATE AND DISPLAY TOTAL ---
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.FinalPrice,
+    0
+  );
+
+  const totalElement = qs('.cart-total-value');
+  if (totalElement) {
+    totalElement.textContent = total.toFixed(2);
+  }
+  // --- END NEW CODE ---
 }
 
 function cartItemTemplate(item) {
