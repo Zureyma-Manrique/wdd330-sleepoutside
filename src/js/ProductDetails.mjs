@@ -26,6 +26,17 @@ export default class ProductDetails {
     cart.push(this.product);
     // save the updated cart
     setLocalStorage('so-cart', cart);
+
+    // Add animation
+    const button = document.getElementById('addToCart');
+    button.classList.add('added');
+    button.textContent = '✓ Added!';
+
+    // Reset after animation
+    setTimeout(() => {
+      button.classList.remove('added');
+      button.textContent = 'Add to Cart';
+    }, 2000);
   }
 
   renderProductDetails() {
