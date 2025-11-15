@@ -295,3 +295,62 @@ footer {
 #addToCart.added {
   animation: successPulse 0.6s ease;
 }
+
+/* Update cart-card to add position relative for the remove button */
+.cart-card {
+  position: relative;
+}
+
+/* Remove button styling - STRETCH GOAL */
+.cart-card__remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--tertiary-color);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  transition: all 0.3s ease;
+  user-select: none;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cart-card__remove:hover {
+  background-color: #a83a0a;
+  transform: scale(1.15);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cart-card__remove:active {
+  transform: scale(0.95);
+}
+
+/* Cart Footer */
+.cart-footer {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--light-grey);
+  border-top: 2px solid var(--primary-color);
+}
+
+.cart-total {
+  text-align: right;
+  font-size: var(--large-font);
+  font-weight: bold;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.cart-total-value {
+  color: var(--secondary-color);
+  font-size: 1.3em;
+}
