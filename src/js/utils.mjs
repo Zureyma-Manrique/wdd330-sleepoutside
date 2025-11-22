@@ -25,7 +25,8 @@ export function getParam(param) {
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.insertAdjacentHTML('afterbegin', template);
+  // Use innerHTML instead of insertAdjacentHTML to replace content
+  parentElement.innerHTML = template;
   if (callback) {
     callback(data);
   }
@@ -53,13 +54,11 @@ export async function loadHeaderFooter() {
     const footerElement = document.querySelector('#main-footer');
 
     if (headerElement && headerTemplate) {
-      headerElement.innerHTML = '';
-      renderWithTemplate(headerTemplate, headerElement);
+      headerElement.innerHTML = headerTemplate;
     }
 
     if (footerElement && footerTemplate) {
-      footerElement.innerHTML = '';
-      renderWithTemplate(footerTemplate, footerElement);
+      footerElement.innerHTML = footerTemplate;
     }
   } catch (error) {
     console.error('Error loading header/footer:', error);
