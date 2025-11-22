@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_SERVER_URL || 'http://wdd330-backend.onrender.com/';
+const baseURL = import.meta.env.VITE_SERVER_URL || 'https://wdd330-backend.onrender.com/';
 
 async function convertToJson(res) {
   const jsonResponse = await res.json(); // Parse body first
