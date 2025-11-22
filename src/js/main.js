@@ -1,6 +1,8 @@
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
-import { qs } from './utils.mjs';
+import { qs, loadHeaderFooter } from './utils.mjs';
+
+loadHeaderFooter();
 
 // Get the element to insert the product cards into
 const productListElement = qs('.product-list');
