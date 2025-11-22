@@ -1,19 +1,15 @@
-// wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
-// or a more concise version if you are into that sort of thing:
-// export const qs = (selector, parent = document) => parent.querySelector(selector);
 
-// retrieve data from localstorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
-// save data to local storage
+
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
-// set a listener for both touchend and click
+
 export function setClick(selector, callback) {
   qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
@@ -30,7 +26,7 @@ export function getParam(param) {
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.insertAdjacentHTML("afterbegin", template);
+  parentElement.insertAdjacentHTML('afterbegin', template);
   if (callback) {
     callback(data);
   }
@@ -43,40 +39,38 @@ async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-
-  const headerTemplate = await loadTemplate("/partials/header.html");
-  const footerTemplate = await loadTemplate("/partials/footer.html");
-
-  const headerElement = document.querySelector("header");
-  const footerElement = document.querySelector("footer");
-
+  const headerTemplate = await loadTemplate('/partials/header.html');
+  const footerTemplate = await loadTemplate('/partials/footer.html');
+  const headerElement = document.querySelector('#main-header');
+  const footerElement = document.querySelector('#main-footer');
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-export function alertMessage(message, scroll = true, duration = 3000) {
+// INDIVIDUAL ACTIVITY: STRETCH GOAL
+export function alertMessage(message, scroll = true) {
+  // Create element
   const alert = document.createElement('div');
   alert.classList.add('alert');
+  // Add message and 'X' button
   alert.innerHTML = `<p>${message}</p><span>X</span>`;
 
+  // Add listener to remove alert when X is clicked
   alert.addEventListener('click', function (e) {
     if (e.target.tagName == 'SPAN') {
       main.removeChild(this);
     }
   });
+
+  // Prepend to main
   const main = document.querySelector('main');
   main.prepend(alert);
-  // scrollTo(0,0);
-  if (scroll) window.scrollTo(0, 0);
 
-  // auto remove after duration
-  // setTimeout(function () {
-  //   main.removeChild(alert);
-  // }, duration);
+  // Scroll to top if requested
+  if (scroll) window.scrollTo(0, 0);
 }
 
 export function removeAllAlerts() {
   const alerts = document.querySelectorAll('.alert');
   alerts.forEach((alert) => document.querySelector('main').removeChild(alert));
 }
-

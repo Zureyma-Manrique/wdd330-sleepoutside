@@ -49,20 +49,14 @@ export default class CheckoutProcess {
     const itemNumElement = document.querySelector(
       `${this.outputSelector} #num-items`
     );
-
-    if (this.list) {
-      itemNumElement.innerText = this.list.length;
-      // calculate the total of all the items in the cart
-      const amounts = this.list.map((item) => item.FinalPrice);
-      this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
-      summaryElement.innerText = '$' + this.itemTotal.toFixed(2);
-    }
+    itemNumElement.innerText = this.list.length;
+    const amounts = this.list.map((item) => item.FinalPrice);
+    this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
+    summaryElement.innerText = '$' + this.itemTotal.toFixed(2);
   }
 
   calculateOrdertotal() {
-    // shipping: $10 for the first item, $2 for each additional
     this.shipping = 10 + (this.list.length - 1) * 2;
-    // tax: 6%
     this.tax = (this.itemTotal * 0.06).toFixed(2);
     this.orderTotal = (
       parseFloat(this.itemTotal) +
@@ -89,7 +83,6 @@ export default class CheckoutProcess {
     const formElement = document.forms['checkout'];
 
     const json = formDataToJSON(formElement);
-    // add totals, and item details
     json.orderDate = new Date();
     json.orderTotal = this.orderTotal;
     json.tax = this.tax;
@@ -102,7 +95,7 @@ export default class CheckoutProcess {
       setLocalStorage('so-cart', []);
       location.assign('/checkout/success.html');
     } catch (err) {
-      // Error Handling (Individual Activity)
+      // Core & Stretch: Catch error and display alerts
       removeAllAlerts();
       for (let message in err.message) {
         alertMessage(err.message[message]);
