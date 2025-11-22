@@ -43,8 +43,16 @@ export async function loadHeaderFooter() {
   const footerTemplate = await loadTemplate('/partials/footer.html');
   const headerElement = document.querySelector('#main-header');
   const footerElement = document.querySelector('#main-footer');
-  renderWithTemplate(headerTemplate, headerElement);
-  renderWithTemplate(footerTemplate, footerElement);
+
+  if (headerElement) {
+    headerElement.innerHTML = '';
+    renderWithTemplate(headerTemplate, headerElement);
+  }
+
+  if (footerElement) {
+    footerElement.innerHTML = '';
+    renderWithTemplate(footerTemplate, footerElement);
+  }
 }
 
 // INDIVIDUAL ACTIVITY: STRETCH GOAL
