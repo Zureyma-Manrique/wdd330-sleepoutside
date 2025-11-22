@@ -354,3 +354,20 @@ footer {
   color: var(--secondary-color);
   font-size: 1.3em;
 }
+
+.alert {
+  padding: 1em;
+  background-color: darkorange;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+  border-radius: 4px;
+}
+
+.alert span {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 5px;
+}

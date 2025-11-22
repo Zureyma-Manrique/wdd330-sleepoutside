@@ -24,26 +24,33 @@
       <fieldset>
         <legend>Shipping</legend>
         <label for="fname">First Name</label>
-        <input type="text" name="fname" required>
+        <input type="text" name="fname" id="fname" required>
+
         <label for="lname">Last Name</label>
-        <input type="text" name="lname" required>
+        <input type="text" name="lname" id="lname" required>
+
         <label for="street">Street</label>
-        <input type="text" name="street" required>
+        <input type="text" name="street" id="street" required>
+
         <label for="city">City</label>
-        <input type="text" name="city" required>
+        <input type="text" name="city" id="city" required>
+
         <label for="state">State</label>
-        <input type="text" name="state" required>
+        <input type="text" name="state" id="state" required>
+
         <label for="zip">Zip</label>
         <input type="text" name="zip" id="zip" required>
       </fieldset>
       <fieldset>
         <legend>Payment</legend>
         <label for="cardNumber">Card Number</label>
-        <input type="text" name="cardNumber" required>
+        <input type="text" name="cardNumber" id="cardNumber" required placeholder="1234123412341234">
+
         <label for="expiration">Expiration</label>
-        <input type="text" name="expiration" required>
+        <input type="text" name="expiration" id="expiration" required placeholder="mm/yy">
+
         <label for="code">Security Code</label>
-        <input type="text" name="code" required>
+        <input type="text" name="code" id="code" required placeholder="123">
       </fieldset>
       <button id="checkoutSubmit" type="submit">Checkout</button>
     </form>
