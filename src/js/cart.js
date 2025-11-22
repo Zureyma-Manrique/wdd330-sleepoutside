@@ -3,6 +3,8 @@ import ExternalServices from './ExternalServices.mjs';
 
 loadHeaderFooter();
 
+loadHeaderFooter();
+
 // Get the product data source
 const dataSource = new ExternalServices('tents');
 
