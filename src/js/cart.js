@@ -1,10 +1,10 @@
 import { getLocalStorage, setLocalStorage, qs, loadHeaderFooter } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 
 loadHeaderFooter();
 
 // Get the product data source
-const dataSource = new ProductData('tents');
+const dataSource = new ExternalServices('tents');
 
 /**
  * Renders the cart contents on the page.

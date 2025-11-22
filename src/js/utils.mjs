@@ -43,15 +43,40 @@ async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  // Cargar las plantillas
+
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
 
-  // Obtener los elementos del DOM donde se inyectarán
   const headerElement = document.querySelector("header");
   const footerElement = document.querySelector("footer");
 
-  // Renderizar
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener('click', function (e) {
+    if (e.target.tagName == 'SPAN') {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // scrollTo(0,0);
+  if (scroll) window.scrollTo(0, 0);
+
+  // auto remove after duration
+  // setTimeout(function () {
+  //   main.removeChild(alert);
+  // }, duration);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach((alert) => document.querySelector('main').removeChild(alert));
+}
+
