@@ -21,8 +21,7 @@ export function setClick(selector, callback) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get('product');
-  return product;
+  return urlParams.get(param);
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
@@ -33,25 +32,37 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 }
 
 async function loadTemplate(path) {
-  const res = await fetch(path);
-  const template = await res.text();
-  return template;
+  try {
+    const res = await fetch(path);
+    if (!res.ok) {
+      throw new Error(`Failed to load template: ${path} (${res.status})`);
+    }
+    const template = await res.text();
+    return template;
+  } catch (error) {
+    console.error('Template loading error:', error);
+    return ''; // Return empty string on error
+  }
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('/partials/header.html');
-  const footerTemplate = await loadTemplate('/partials/footer.html');
-  const headerElement = document.querySelector('#main-header');
-  const footerElement = document.querySelector('#main-footer');
+  try {
+    const headerTemplate = await loadTemplate('/partials/header.html');
+    const footerTemplate = await loadTemplate('/partials/footer.html');
+    const headerElement = document.querySelector('#main-header');
+    const footerElement = document.querySelector('#main-footer');
 
-  if (headerElement) {
-    headerElement.innerHTML = '';
-    renderWithTemplate(headerTemplate, headerElement);
-  }
+    if (headerElement && headerTemplate) {
+      headerElement.innerHTML = '';
+      renderWithTemplate(headerTemplate, headerElement);
+    }
 
-  if (footerElement) {
-    footerElement.innerHTML = '';
-    renderWithTemplate(footerTemplate, footerElement);
+    if (footerElement && footerTemplate) {
+      footerElement.innerHTML = '';
+      renderWithTemplate(footerTemplate, footerElement);
+    }
+  } catch (error) {
+    console.error('Error loading header/footer:', error);
   }
 }
 
