@@ -28,3 +28,30 @@ export function getParam(param) {
   const product = urlParams.get('product');
   return product;
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  // Cargar las plantillas
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  // Obtener los elementos del DOM donde se inyectarán
+  const headerElement = document.querySelector("header");
+  const footerElement = document.querySelector("footer");
+
+  // Renderizar
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+}
